@@ -16,21 +16,12 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
     <!-- tab icon -->
     <link rel="shortcut icon" href="">
     <!-- bootstrap ui -->
-    <!-- <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <!-- htmx -->
-    <!-- <script src="/node_modules/htmx.org/dist/htmx.min.js" crossorigin="anonymous"></script> -->
-    <script src="https://unpkg.com/htmx.org@2.0.3"
-        integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
-        crossorigin="anonymous"></script>
+    <script src="../node_modules/htmx.org/dist/htmx.min.js" crossorigin="anonymous"></script>
     <!-- bootstrap icons -->
-    <!-- <link rel="stylesheet" href="/node_modules/bootstrap-icons/font/bootstrap-icons.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 
 <body>
