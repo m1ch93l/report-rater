@@ -10,6 +10,5 @@ if ($stmt) {
     
     session_destroy();
     session_unset();
-    $_SESSION['hide'] = true;
     header('location: index');
 }
