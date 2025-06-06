@@ -40,7 +40,7 @@ if (isset($_SESSION['participant'])) {
                                     Login
                                 </button>
                                 <hr>
-                                <!-- <a href="signup" class="float-end btn btn-success btn-sm mb-1 me-2">Register</a> -->
+                                <a href="signup" class="float-end btn btn-success btn-sm mb-1 me-2">Register</a>
                             </div>
                         </form>
                     </div>
