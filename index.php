@@ -26,6 +26,11 @@ if (isset($_SESSION['participant'])) {
                                 You have successfully registered.<br> Please login now!
                             </div>
                             <?php unset($_SESSION['registered']);
+                        } elseif (isset($_SESSION['error'])) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                Incorrect username or password.<br> Please try again!
+                            </div>
+                            <?php unset($_SESSION['error']);
                         } ?>
                         <form action="crud" method="post">
                             <div class="form-group">
