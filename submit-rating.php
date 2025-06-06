@@ -6,7 +6,7 @@ include 'includes/database.php';
 $ratings = $_POST['ratings'];
 
 if ($ratings == null) {
-    header('Location: /report-rater');
+    header('HX-Location: home?error=true');
 }
 
 // Update the ratings for each user in the database

@@ -27,10 +27,10 @@
                     <p class="text-center">You have already rated this participant.</p>
                     <h1 class="text-center">Happy Coding!</h1>
 
-                    <?php
+                <?php } elseif (isset($_GET['error']) && $_GET['error'] == 'true') { ?>
+                    <p class="text-center">You have no permission to give rating</p>
+                <?php } elseif ($answered == 0) { ?>
 
-                } elseif ($answered == 0) {
-                    ?>
                     <div class="card mb-1 shadow">
                         <div class="card-header">
                             <h4 class="card-title">Group #</h4>
@@ -147,7 +147,6 @@
                                     </table>
                                     <button class="btn btn-dark btn-sm" type="submit">Submit Rating</button>
                                 </form>
-
                             </div>
                         </div>
                     </div>
