@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2025 at 08:13 AM
+-- Generation Time: Jun 06, 2025 at 08:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -80,6 +80,15 @@ CREATE TABLE `participant` (
   `group_belong` int(11) DEFAULT NULL,
   `year_level_section` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `participant`
+--
+
+INSERT INTO `participant` (`id`, `participant_id`, `password`, `fullname`, `group_belong`, `year_level_section`) VALUES
+(1, 'student1', 'student1', 'student1', 1, 'bsis 1a'),
+(2, 'student2', 'student2', 'student2', 2, 'bsis 1a'),
+(3, 'student3', 'student3', 'student3', 1, 'bsis 1a');
 
 -- --------------------------------------------------------
 
@@ -166,7 +175,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `participant`
 --
 ALTER TABLE `participant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rate`
