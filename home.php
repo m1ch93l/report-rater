@@ -15,14 +15,21 @@
             <div class="col-1"></div>
             <div class="col-lg-10 col-sm-12">
                 <?php
-                $sql  = "SELECT COUNT(*) FROM rate WHERE participant_id = :participant AND rater_id = :rater";
+
+                $sql  = "SELECT COUNT(*) FROM rate WHERE rater_id = :rater";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':participant', $_SESSION['participant']);
-                $stmt->bindParam(':rater', $_SESSION['id']);
+                $stmt->bindParam(':rater', $_SESSION['participant']);
                 $stmt->execute();
                 $answered = $stmt->fetchColumn();
 
-                if ($answered == 0) {
+                if (isset($_GET['alreadyRated']) && $_GET['alreadyRated'] == 'true') {
+                    ?>
+                    <p class="text-center">You have already rated this participant.</p>
+                    <h1 class="text-center">Happy Coding!</h1>
+
+                    <?php
+
+                } elseif ($answered == 0) {
                     ?>
                     <div class="card mb-1 shadow">
                         <div class="card-header">

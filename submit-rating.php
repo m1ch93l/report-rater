@@ -12,7 +12,7 @@ if ($ratings == null) {
 // Update the ratings for each user in the database
 foreach ($ratings as $user_id => $user_ratings) {
     // Check if this rater has already rated this participant
-    $checkSql = "SELECT COUNT(*) FROM rate WHERE participant_id = :user_id AND rater_id = :rater_id";
+    $checkSql  = "SELECT COUNT(*) FROM rate WHERE participant_id = :user_id AND rater_id = :rater_id";
     $checkStmt = $conn->prepare($checkSql);
     $checkStmt->bindParam(':user_id', $user_id);
     $checkStmt->bindParam(':rater_id', $_SESSION['participant']);
@@ -21,7 +21,7 @@ foreach ($ratings as $user_id => $user_ratings) {
 
     // If not already rated, insert the new rating
     if ($alreadyRated == 0) {
-        $sql = "INSERT INTO rate (content, organization, presentation, delivery, participant_id, rater_id) VALUES (:content, :organization, :presentation, :delivery, :user_id, :rater_id)";
+        $sql  = "INSERT INTO rate (content, organization, presentation, delivery, participant_id, rater_id) VALUES (:content, :organization, :presentation, :delivery, :user_id, :rater_id)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':content', $user_ratings['content']);
         $stmt->bindParam(':organization', $user_ratings['organization']);
@@ -31,13 +31,11 @@ foreach ($ratings as $user_id => $user_ratings) {
         $stmt->bindParam(':rater_id', $_SESSION['participant']);
         $stmt->execute();
 
-        echo '<p class="text-center">Thank you for your rating!</p>
-        <h1 class="text-center">Happy Coding!</h1>';
-        
+        // Tell HTMX to redirect
+        header("HX-Location: home?alreadyRated=true");
+
     } else {
-        echo '<p class="text-center">You have already rated this participant.</p>
-        <h1 class="text-center">Happy Coding!</h1>';
+        // Tell HTMX to redirect
+        header("HX-Location: home?alreadyRated=true");
     }
 }
-
-//$_SESSION['hide'] = true;
