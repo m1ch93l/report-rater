@@ -4,7 +4,7 @@ $config = [
     'host'   => 'localhost',
     'user'   => 'root',
     'pass'   => '',
-    'dbname' => 'codemadeup',
+    'dbname' => 'report-rater',
 ];
 
 $dsn     = "mysql:host={$config['host']};dbname={$config['dbname']}";
