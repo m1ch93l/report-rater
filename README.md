@@ -26,3 +26,13 @@ This project is a simple rater system designed for class reporters to rate and p
 - You can use xampp, wamp, or any other local server setup.
    - Place the project files in the server's root directory (e.g., `htdocs` for XAMPP).
    - Access the application via your web browser at `http://localhost/report-rater`.
+
+## Usage
+- Navigate to the application in your web browser.
+- You will be prompted to log in or register as a user.
+   default credentials are:
+   - Username: `123`
+   - Password: `123`
+- You will see a list of reports.
+- Click on a report to view its details and provide ratings.
+- Use the rating system to give feedback on the report.
