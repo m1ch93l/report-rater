@@ -22,5 +22,9 @@ foreach ($stmt as $row) { ?>
             <button class="btn btn-secondary btn-sm" hx-get="edit-participant.php?id=<?= $row['id'] ?>&inline=1"
                 hx-target="#participant-<?= $row['id'] ?>" hx-swap="outerHTML">Edit</button>
         </td>
+        <td>
+            <button class="btn btn-danger btn-sm" hx-get="delete-participant.php?id=<?= $row['id'] ?>"
+                hx-target="#participant-<?= $row['id'] ?>" hx-swap="outerHTML">Delete</button>
+        </td>
     </tr>
 <?php } ?>

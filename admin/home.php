@@ -50,7 +50,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student</button>
+                    <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student to Dashboard</button>
                 </div>
             </div>
         </form>
