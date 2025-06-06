@@ -50,7 +50,15 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student to Dashboard</button>
+                    <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student to
+                        Dashboard</button>
+                </div>
+                <div class="col-md-2">
+                    <!-- Automatically load the select on page load -->
+                    <div id="group-select-wrapper" hx-get="get-groups.php" hx-trigger="load" hx-target="this">
+                    </div>
+                    <!-- Message container -->
+                    <div id="message" class="mt-2"></div>
                 </div>
             </div>
         </form>
