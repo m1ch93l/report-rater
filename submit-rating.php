@@ -40,4 +40,4 @@ foreach ($ratings as $user_id => $user_ratings) {
     }
 }
 
-// $_SESSION['hide'] = true;
+//$_SESSION['hide'] = true;
