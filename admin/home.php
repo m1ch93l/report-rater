@@ -29,6 +29,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
         <div class="float-start ms-3">
             <button class="btn btn-dark pt-0" data-bs-toggle="modal" data-bs-target="#manage">
                 <span><i class="bi bi-person-fill-gear"></i></span>
+                Manage Students
             </button>
         </div>
         ReportRater
@@ -37,17 +38,6 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
             <span><i class="bi bi-box-arrow-right"></i>logout</span>
         </a>
     </header>
-
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasRightLabel">Updates</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body" id="participant-list-update" hx-get="participant-list-update"
-            hx-trigger="load, every 2s">
-            <!-- this shows the update -->
-        </div>
-    </div>
 
     <div class="container-fluid">
 
@@ -62,16 +52,23 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                 <div class="col-md-2">
                     <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student</button>
                 </div>
-                <div class="col-md-8">
-                    <button class="btn btn-warning btn-sm float-end" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                        <span><i class="bi bi-broadcast"></i></span></button>
-                </div>
             </div>
         </form>
 
         <h3 class="mt-2 ms-2 bg-success text-white">Participant</h3>
-        <div class="container-fluid" id="participant-list" hx-get="get-participants" hx-trigger="load, every 2s">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 shadow-sm" id="participant-list" hx-get="get-participants"
+                    hx-trigger="load, every 2s">
+
+                </div>
+                <div class="col-md-2 shadow-sm">
+                    <div class="offcanvas-body" id="participant-list-update" hx-get="participant-list-update"
+                        hx-trigger="load, every 2s">
+                        <!-- this shows the update -->
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
