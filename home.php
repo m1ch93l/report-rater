@@ -4,7 +4,7 @@
 <body>
     <header class="bg-dark py-3 text-white text-center">
         ReportRater
-        <a href="logout" type="button"
+        <a type="button" hx-get="logout" hx-swap="outerHTML" hx-target="body" hx-trigger="click" hx-push-url="true"
             class="text-decoration-none text-white float-end h6 me-3 border p-1 text-capitalize">logout</a>
     </header>
     <div class="container-lg">
