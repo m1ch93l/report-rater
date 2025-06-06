@@ -50,6 +50,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['fullname']    = $row['fullname'];
                 $_SESSION['hide'] = false;
                 $_SESSION['group_belong'] = $row['group_belong'];
+                $_SESSION['online_status'] = $row['online_status'];
+
+                // Update status to online
+                $updateSql = "UPDATE participant SET online_status = 1 WHERE id = :id";
+                $updateStmt = $conn->prepare($updateSql);
+                $updateStmt->bindParam(':id', $row['id']);
+                $updateStmt->execute();
+
                 header('location: home');
             } else {
                 $_SESSION['error'] = 'Incorrect password';

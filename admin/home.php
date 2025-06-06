@@ -63,8 +63,10 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
 
                 </div>
                 <div class="col-md-2 shadow-sm">
-                    <div class="offcanvas-body" id="participant-list-update" hx-get="participant-list-update"
-                        hx-trigger="load, every 2s">
+                <i class="bi bi-circle-fill text-success">Online</i>
+                <i class="bi bi-circle-fill text-danger">Offline</i>
+                    <div class="offcanvas-body mt-2" id="participant-list-update" hx-get="participant-list-update"
+                        hx-trigger="load, every 1s">
                         <!-- this shows the update -->
                     </div>
                 </div>
