@@ -32,7 +32,7 @@ if (isset($_SESSION['participant'])) {
                             </div>
                             <?php unset($_SESSION['error']);
                         } ?>
-                        <form hx-post="crud" hx-swap="outerHTML" hx-target="body" hx-trigger="click" hx-push-url="true">
+                        <form action="crud" method="post">
                             <div class="form-group">
                                 <label for="participant" class="form-label">Username</label>
                                 <input placeholder="ex. Juan" type="text" class="form-control mb-2" id="participant"
