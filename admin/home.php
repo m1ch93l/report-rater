@@ -54,7 +54,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                         Dashboard</button>
                 </div>
                 <div class="col-md-2">
-                    <!-- Automatically load the select on page load -->
+                    <!-- Fetch the groups on db -->
                     <div id="group-select-wrapper" hx-get="get-groups.php" hx-trigger="load" hx-target="this">
                     </div>
                     <!-- Message container -->

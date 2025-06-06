@@ -2,7 +2,7 @@
 
 require_once '../includes/database.php';
 
-$sql  = "SELECT participant.id as id, participant.fullname as fullname, rating.content as content, rating.organization as organization, rating.presentation as presentation, rating.delivery as delivery, `groups`.group_no as groupno FROM rating JOIN participant ON rating.participant_id = participant.id JOIN `groups` ON participant.group_belong = `groups`.id ORDER BY `groups`.group_no, participant.fullname";
+$sql  = "SELECT participant.id as id, participant.fullname as fullname, rating.content as content, rating.organization as organization, rating.presentation as presentation, rating.delivery as delivery, `groups`.group_no as groupno, `groups`.status as activeRating FROM rating JOIN participant ON rating.participant_id = participant.id JOIN `groups` ON participant.group_belong = `groups`.id ORDER BY `groups`.group_no, participant.fullname";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 
@@ -11,7 +11,9 @@ foreach ($stmt as $row) {
     if ($prev_groupno !== $row['groupno']) {
         if ($prev_groupno !== null)
             echo '</div>';
-        echo '<div class="row mt-3"><h3 class="">Group ' . $row['groupno'] . '</h3></div><div class="row">';
+        echo '<div class="row mt-3">
+        <h3 class="">Group ' . $row['groupno'] . '
+        </h3></div><div class="row">';
         $prev_groupno = $row['groupno'];
     }
     ?>
@@ -31,6 +33,9 @@ foreach ($stmt as $row) {
                     <span><i class="bi bi-trash3"></i></span>
                 </button>
 
+                <?php if ($row['activeRating'] === 1) { ?>
+                    <span class="badge bg-warning">Active</span>
+                <?php } ?>
             </div>
         </div>
     </div>
