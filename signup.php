@@ -18,7 +18,7 @@ if (isset($_SESSION['participant'])) {
             <div class="col-md-12">
                 <div class="card" style="width: 20rem;">
                     <div class="card-header">
-                        <h3 class="card-title">mikexam</h3>
+                        <h3 class="card-title">Register Student</h3>
                     </div>
                     <div class="card-body">
 
@@ -38,7 +38,7 @@ if (isset($_SESSION['participant'])) {
                                     <option value="" disabled selected>Select Group No.</option>
                                     <?php
                                     include 'includes/database.php';
-                                    $sql = "SELECT DISTINCT group_no FROM groups ORDER BY group_no";
+                                    $sql  = "SELECT DISTINCT group_no FROM groups ORDER BY group_no";
                                     $stmt = $conn->prepare($sql);
                                     $stmt->execute();
                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -47,8 +47,11 @@ if (isset($_SESSION['participant'])) {
                                     ?>
                                 </select>
                                 <label for="year_level_section">Department, Year Level, and Section</label>
-                                <input placeholder="ex. BSIS 1A" type="text" class="form-control text-uppercase" id="year_level_section" name="year_level_section" required>
+                                <input placeholder="ex. BSIS 1A" type="text" class="form-control text-uppercase"
+                                    id="year_level_section" name="year_level_section" required>
                                 <br>
+                                <a hx-get="/report-rater" hx-swap="outerHTML" hx-target="body" hx-trigger="click"
+                                    hx-push-url="true" class="btn btn-secondary btn-sm mb-1 me-2">Cancel</a>
                                 <button type="submit" class="float-end btn btn-success btn-sm mb-1 me-2"
                                     name="register">
                                     Register
