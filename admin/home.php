@@ -25,45 +25,66 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
 </head>
 
 <body>
-    <header class="bg-dark py-3 text-white text-center mb-2">
-        <div class="float-start ms-3">
-            <button class="btn btn-dark pt-0" data-bs-toggle="modal" data-bs-target="#manage">
-                <span><i class="bi bi-person-fill-gear"></i></span>
-                Manage Students
-            </button>
+    <header class="sticky-top w-100">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <button class="navbar-brand btn btn-dark text-white" data-bs-toggle="modal"
+                    data-bs-target="#manage"><span><i class="bi bi-person-fill-gear"></i></span>Manage Students</button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"></a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text">
+                        <a type="button" hx-get="../logout" hx-swap="outerHTML" hx-target="body" hx-trigger="click"
+                            hx-push-url="true" class="text-decoration-none text-capitalize hover:text-dark p-1">
+                            <span><i class="bi bi-box-arrow-right"></i> logout</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid w-100">
+            <div class="row bg-light pt-1">
+                <form hx-post="add-user" hx-target="#participant-list" hx-swap="beforeend">
+                    <div class="row g-4">
+                        <div class="col-md-2">
+                            <select class="form-select form-select-sm text-capitalize" name="participant"
+                                hx-get="get-users" hx-trigger="load" hx-target="this">
+                                <!-- Options will be dynamically loaded here -->
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student to
+                                Dashboard</button>
+                        </div>
+                        <div class="col-md-2">
+                            <!-- Fetch the groups on db -->
+                            <div id="group-select-wrapper" hx-get="get-groups.php" hx-trigger="load" hx-target="this">
+                            </div>
+                            <!-- Message container -->
+                            <div id="message" class="mt-2"></div>
+                        </div>
+                    </div>
+                </form>
+
+                <h3 class="bg-success text-white">Participant</h3>
+            </div>
         </div>
-        ReportRater
-        <a type="button" hx-get="../logout" hx-swap="outerHTML" hx-target="body" hx-trigger="click" hx-push-url="true"
-            class="text-decoration-none text-white float-end h5 me-3 p-1 text-capitalize mt-0 pt-0">
-            <span><i class="bi bi-box-arrow-right"></i>logout</span>
-        </a>
     </header>
 
     <div class="container-fluid">
-
-        <form hx-post="add-user" hx-target="#participant-list" hx-swap="beforeend">
-            <div class="row g-4">
-                <div class="col-md-2">
-                    <select class="form-select form-select-sm text-capitalize" name="participant" hx-get="get-users"
-                        hx-trigger="load" hx-target="this">
-                        <!-- Options will be dynamically loaded here -->
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" name="add-participant" class="btn btn-success btn-sm">Add Student to
-                        Dashboard</button>
-                </div>
-                <div class="col-md-2">
-                    <!-- Fetch the groups on db -->
-                    <div id="group-select-wrapper" hx-get="get-groups.php" hx-trigger="load" hx-target="this">
-                    </div>
-                    <!-- Message container -->
-                    <div id="message" class="mt-2"></div>
-                </div>
-            </div>
-        </form>
-
-        <h3 class="mt-2 ms-2 bg-success text-white">Participant</h3>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 shadow-sm" id="participant-list" hx-get="get-participants"
@@ -80,7 +101,6 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                 </div>
             </div>
         </div>
-
     </div>
 
     <!-- Modal para sa bawat user -->
