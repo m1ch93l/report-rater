@@ -18,12 +18,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($stmt) {
             $_SESSION['registered'] = true;
             header('location: index');
+            exit();
         } else {
-            $_SESSION['error'] = 'Registration failed';
+            $_SESSION['error'] = true;
+            header('location: index');
         }
 
     } else {
-        $_SESSION['error'] = 'Input voter credentials first';
+        $_SESSION['error'] = true;
+        header('location: index');
     }
 
     // for login of participant
@@ -47,9 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 header('location: home');
                 exit();
-                
+
             } else {
-                $_SESSION['error'] = 'Incorrect password';
+                $_SESSION['error'] = true;
+                header('location: index');
                 exit();
             }
         }
@@ -63,16 +67,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('location: admin/home');
                 exit();
             } else {
-                $_SESSION['error'] = 'Incorrect password';
+                $_SESSION['error'] = true;
+                header('location: index');
                 exit();
             }
         } else {
-            $_SESSION['error'] = 'Cannot find account with the username';
+            $_SESSION['error'] = true;
+            header('location: index');
             exit();
         }
 
     } else {
-        $_SESSION['error'] = 'Input voter credentials first';
+        $_SESSION['error'] = true;
+        header('location: index');
         exit();
     }
 }
