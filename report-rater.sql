@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2025 at 08:50 AM
+-- Generation Time: Jun 07, 2025 at 12:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,8 +58,8 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `group_no`, `status`) VALUES
-(1, '1', 1),
-(2, '2', 0),
+(1, '1', 0),
+(2, '2', 1),
 (3, '3', 0),
 (4, '4', 0),
 (5, '5', 0),
@@ -78,17 +78,21 @@ CREATE TABLE `participant` (
   `password` varchar(255) DEFAULT NULL,
   `fullname` varchar(255) NOT NULL DEFAULT '0',
   `group_belong` int(11) DEFAULT NULL,
-  `year_level_section` varchar(50) DEFAULT NULL
+  `year_level_section` varchar(50) DEFAULT NULL,
+  `online_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `participant`
 --
 
-INSERT INTO `participant` (`id`, `participant_id`, `password`, `fullname`, `group_belong`, `year_level_section`) VALUES
-(1, 'student1', 'student1', 'student1', 1, 'bsis 1a'),
-(2, 'student2', 'student2', 'student2', 2, 'bsis 1a'),
-(3, 'student3', 'student3', 'student3', 1, 'bsis 1a');
+INSERT INTO `participant` (`id`, `participant_id`, `password`, `fullname`, `group_belong`, `year_level_section`, `online_status`) VALUES
+(1, 'User1', 'User1', 'User1', 4, 'Bsis1a', 1),
+(2, 'User2', 'User2', 'User2', 2, 'Bsit1a', 0),
+(3, 'User3', 'User3', 'User3', 1, 'Bsis4a', 0),
+(4, 'User4', 'User4', 'User4', 3, 'Bsis6f', 0),
+(5, 'User5', 'User5', 'User5', 2, 'Bsit3d', 0),
+(6, 'User6', 'User6', 'User6', 2, 'Bsit1d', 0);
 
 -- --------------------------------------------------------
 
@@ -175,7 +179,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `participant`
 --
 ALTER TABLE `participant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rate`
