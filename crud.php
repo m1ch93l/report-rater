@@ -1,90 +1,85 @@
 <?php
-
 session_start();
-require_once 'includes/database.php';
+//require_once 'includes/database.php';
+require_once 'model/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // for registration of participant
+    //for registration of participant
     if (isset($_POST['register'])) {
-        $participant = $_POST['participant'];
-        $password    = $_POST['password'];
-        $name        = $_POST['name'];
-        $group_belong = $_POST['group_belong'];
+        $participant        = $_POST['participant'];
+        $password           = $_POST['password'];
+        $fullname           = $_POST['name'];
+        $group_belong       = $_POST['group_belong'];
         $year_level_section = $_POST['year_level_section'];
 
-        $sql  = "INSERT INTO participant (participant_id, password, fullname, group_belong, year_level_section) VALUES (:participant, :password, :name, :group_belong, :year_level_section)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':participant', $participant);
-        $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':group_belong', $group_belong);
-        $stmt->bindParam(':year_level_section', $year_level_section);
-        
-        if ($stmt->execute()) {
+        $newUser = new User();
+        $stmt    = $newUser->create($participant, $password, $fullname, $group_belong, $year_level_section);
+
+        if ($stmt) {
             $_SESSION['registered'] = true;
             header('location: index');
+            exit();
         } else {
-            $_SESSION['error'] = 'Registration failed';
+            $_SESSION['error'] = true;
+            header('location: index');
         }
 
     } else {
-        $_SESSION['error'] = 'Input voter credentials first';
+        $_SESSION['error'] = true;
+        header('location: index');
     }
 
     // for login of participant
     if (isset($_POST['login'])) {
+
         $participant = $_POST['participant'];
         $password    = $_POST['password'];
 
-        $sql  = "SELECT * FROM participant WHERE participant_id = :participant";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':participant', $participant);
-        $stmt->execute();
+        $student = new User();
+        $student = $student->findStudentUser($participant);
+        if ($student) {
+            if ($student['password'] == $password) {
+                $_SESSION['participant']   = $student['id'];
+                $_SESSION['fullname']      = $student['fullname'];
+                $_SESSION['group_belong']  = $student['group_belong'];
+                $_SESSION['online_status'] = $student['online_status'];
 
-        if ($stmt->rowCount() < 1) {
-            $_SESSION['error'] = 'Cannot find account with the username';
-        } else {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if ($row['password'] == $password) {
-                $_SESSION['participant'] = $row['id'];
-                $_SESSION['fullname']    = $row['fullname'];
-                $_SESSION['hide'] = false;
-                $_SESSION['group_belong'] = $row['group_belong'];
-                $_SESSION['online_status'] = $row['online_status'];
-
-                // Update status to online
-                $updateSql = "UPDATE participant SET online_status = 1 WHERE id = :id";
-                $updateStmt = $conn->prepare($updateSql);
-                $updateStmt->bindParam(':id', $row['id']);
-                $updateStmt->execute();
+                $studentOnline = new User();
+                // change or update the online status of participants in the database table
+                $studentOnline->updateStatusToOnline($student['id']);
 
                 header('location: home');
+                exit();
+
             } else {
-                $_SESSION['error'] = 'Incorrect password';
+                $_SESSION['error'] = true;
+                header('location: index');
+                exit();
             }
         }
 
-        $sql  = "SELECT * FROM admin WHERE username = :participant";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':participant', $participant);
-        $stmt->execute();
-
-        if ($stmt->rowCount() < 1) {
-            $_SESSION['error'] = 'Cannot find account with the username';
-        } else {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($password, $row['password'])) {
-                $_SESSION['admin'] = $row['id'];
+        // using admin function class of user from model
+        $user  = new User();
+        $admin = $user->findAdminUser($_POST['participant']);
+        if ($admin) {
+            if (password_verify($password, $admin['password'])) {
+                $_SESSION['admin'] = $admin['id'];
                 header('location: admin/home');
+                exit();
             } else {
-                $_SESSION['error'] = 'Incorrect password';
+                $_SESSION['error'] = true;
+                header('location: index');
+                exit();
             }
+        } else {
+            $_SESSION['error'] = true;
+            header('location: index');
+            exit();
         }
 
     } else {
-        $_SESSION['error'] = 'Input voter credentials first';
+        $_SESSION['error'] = true;
+        header('location: index');
+        exit();
     }
-
-    header('location: home');
-
 }
