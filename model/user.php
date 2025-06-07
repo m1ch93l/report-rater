@@ -26,4 +26,18 @@ class User extends Database
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
+    public function create($participant, $password, $fullname, $group_belong, $year_level_section)
+    {
+        $sql = "INSERT INTO participant (participant_id, password, fullname, group_belong, year_level_section)
+                VALUES (:participant, :password, :fullname, :group_belong, :year_level_section)";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindValue(':participant', $participant);
+        $stmt->bindValue(':password', $password);
+        $stmt->bindValue(':fullname', $fullname);
+        $stmt->bindValue(':group_belong', $group_belong);
+        $stmt->bindValue(':year_level_section', $year_level_section);
+        return $stmt->execute();
+    }
 }
