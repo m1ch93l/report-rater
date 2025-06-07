@@ -20,7 +20,7 @@ class User extends Database
 
     public function findStudentUser($username)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM student WHERE username = :username");
+        $stmt = $this->conn->prepare("SELECT * FROM participant WHERE participant_id = :username");
         $stmt->bindValue(':username', $username);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);

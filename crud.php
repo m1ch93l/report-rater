@@ -37,50 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $participant = $_POST['participant'];
         $password    = $_POST['password'];
 
-        // $sql  = "SELECT * FROM participant WHERE participant_id = :participant";
-        // $stmt = $conn->prepare($sql);
-        // $stmt->bindParam(':participant', $participant);
-        // $stmt->execute();
-
-        // if ($stmt->rowCount() < 1) {
-        //     $_SESSION['error'] = 'Cannot find account with the username';
-        // } else {
-        //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        //     if ($row['password'] == $password) {
-        //         $_SESSION['participant']   = $row['id'];
-        //         $_SESSION['fullname']      = $row['fullname'];
-        //         $_SESSION['hide']          = false;
-        //         $_SESSION['group_belong']  = $row['group_belong'];
-        //         $_SESSION['online_status'] = $row['online_status'];
-
-        //         // Update status to online
-        //         $updateSql  = "UPDATE participant SET online_status = 1 WHERE id = :id";
-        //         $updateStmt = $conn->prepare($updateSql);
-        //         $updateStmt->bindParam(':id', $row['id']);
-        //         $updateStmt->execute();
-
-        //         header('location: home');
-        //     } else {
-        //         $_SESSION['error'] = 'Incorrect password';
-        //     }
-        // }
-
-        // $sql  = "SELECT * FROM admin WHERE username = :participant";
-        // $stmt = $conn->prepare($sql);
-        // $stmt->bindParam(':participant', $participant);
-        // $stmt->execute();
-
-        // if ($stmt->rowCount() < 1) {
-        //     $_SESSION['error'] = 'Cannot find account with the username';
-        // } else {
-        //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        //     if (password_verify($password, $row['password'])) {
-        //         $_SESSION['admin'] = $row['id'];
-        //         header('location: admin/home');
-        //     } else {
-        //         $_SESSION['error'] = 'Incorrect password';
-        //     }
-        // }
+        $student = new User();
+        $student = $student->findStudentUser($_POST['participant']);
+        if ($student) {
+            if ( $student['password'] == $password) {
+                $_SESSION['participant']   = $student['id'];
+                $_SESSION['fullname']      = $student['fullname'];
+                $_SESSION['group_belong']  = $student['group_belong'];
+                $_SESSION['online_status'] = $student['online_status'];
+                header('location: home');
+                exit();
+            } else {
+                $_SESSION['error'] = 'Incorrect password';
+                exit();
+            }
+        }
 
         // using admin function class of user from model
         $user  = new User();
@@ -103,7 +74,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['error'] = 'Input voter credentials first';
         exit();
     }
-
-    //header('location: home');
 
 }
