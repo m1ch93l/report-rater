@@ -1,27 +1,29 @@
 <?php
-
 require_once 'config/database.php';
-
 class User extends Database
 {
     private $conn;
 
     public function __construct()
     {
-        $this->conn = $this->getConnection();
+        $this->conn = $this->getConnection(); // from parent Database class
     }
+
     public function findAdminUser($username)
     {
         $stmt = $this->conn->prepare("SELECT * FROM admin WHERE username = :username");
-        $stmt->bindParam(':username', $username);
+        $stmt->bindValue(':username', $username);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
     }
+
     public function findStudentUser($username)
     {
         $stmt = $this->conn->prepare("SELECT * FROM student WHERE username = :username");
-        $stmt->bindParam(':username', $username);
+        $stmt->bindValue(':username', $username);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
     }
 }
