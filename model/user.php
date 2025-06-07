@@ -26,6 +26,13 @@ class User extends Database
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
+    public function updateStatusToOnline($id)
+    {
+        $sql  = "UPDATE participant SET online_status = 1 WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
     public function create($participant, $password, $fullname, $group_belong, $year_level_section)
     {
         $sql = "INSERT INTO participant (participant_id, password, fullname, group_belong, year_level_section)

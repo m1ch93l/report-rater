@@ -33,15 +33,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password    = $_POST['password'];
 
         $student = new User();
-        $student = $student->findStudentUser($_POST['participant']);
+        $student = $student->findStudentUser($participant);
         if ($student) {
             if ($student['password'] == $password) {
                 $_SESSION['participant']   = $student['id'];
                 $_SESSION['fullname']      = $student['fullname'];
                 $_SESSION['group_belong']  = $student['group_belong'];
                 $_SESSION['online_status'] = $student['online_status'];
+
+                $studentOnline = new User();
+                // change or update the online status of participants in the database table
+                $studentOnline->updateStatusToOnline($student['id']);
+
                 header('location: home');
                 exit();
+                
             } else {
                 $_SESSION['error'] = 'Incorrect password';
                 exit();
