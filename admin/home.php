@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once '../includes/database.php';
+
+require_once '../model/group.php';
 
 if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
     header('location: index');
@@ -98,6 +99,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                         hx-trigger="load, every 1s">
                         <!-- this shows the update -->
                     </div>
+
                 </div>
             </div>
         </div>
