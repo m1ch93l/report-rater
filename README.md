@@ -10,20 +10,23 @@ This project is a simple rater system designed for class reporters to rate and p
 
 ## Installation
 1. Clone the repository:
-   ```bash
+   ```sh
    git clone https://github.com/m1ch93l/report-rater.git
    ```
 2. Navigate to the project directory:
-   ```bash
+   ```sh
    cd report-rater
    ```
 3. Set up the database:
    - Create a MySQL database and import the `report-rater.sql` file provided in the project.
 4. Configure the database connection:
-   - Edit the `database.php` file with your database credentials.
-
-5. Start a local server:
-- You can use xampp, wamp, or any other local server setup.
+   - Edit the `config/database.php` file with your database credentials.
+5. Execute the following commands to install the required dependencies:
+   ```sh
+   npm install 
+   ```
+6. Start a local server:
+   - You can use xampp or any other local server setup.
    - Place the project files in the server's root directory (e.g., `htdocs` for XAMPP).
    - Access the application via your web browser at `http://localhost/report-rater`.
 
