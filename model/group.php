@@ -24,4 +24,12 @@ class Group extends Database
         $stmt->execute();
         return $stmt;
     }
+    // Get active 'group_no' when 'status' is 1
+    public function getActiveGroup()
+    {
+        $sql  = "SELECT group_no FROM `groups` WHERE status = 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 }

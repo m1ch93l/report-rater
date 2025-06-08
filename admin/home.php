@@ -96,10 +96,6 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                         hx-trigger="load, every 1s">
                         <!-- this shows the update -->
                     </div>
-                    <div class="offcanvas-body mt-2" id="has-been-rated" hx-get="has-been-rated"
-                        hx-trigger="load, every 1s">
-                        <!-- this shows the update -->
-                    </div>
 
                 </div>
             </div>
