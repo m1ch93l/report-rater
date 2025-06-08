@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-require_once '../model/group.php';
-
 if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
     header('location: index');
 } ?>
@@ -48,8 +46,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a type="button" hx-get="../logout" hx-swap="outerHTML" hx-target="body" hx-trigger="click"
-                            hx-push-url="true" class="text-decoration-none text-capitalize hover:text-dark p-1">
+                        <a type="button" href="logout" class="text-decoration-none text-capitalize hover:text-dark p-1">
                             <span><i class="bi bi-box-arrow-right"></i> logout</span>
                         </a>
                     </span>
@@ -96,6 +93,10 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                     <i class="bi bi-circle-fill text-success">Online</i>
                     <i class="bi bi-circle-fill text-danger">Offline</i>
                     <div class="offcanvas-body mt-2" id="participant-list-update" hx-get="participant-list-update"
+                        hx-trigger="load, every 1s">
+                        <!-- this shows the update -->
+                    </div>
+                    <div class="offcanvas-body mt-2" id="has-been-rated" hx-get="has-been-rated"
                         hx-trigger="load, every 1s">
                         <!-- this shows the update -->
                     </div>
