@@ -6,7 +6,7 @@ include 'includes/database.php';
 $ratings = $_POST['ratings'];
 
 if ($ratings == null) {
-    header('HX-Location: home?error=true');
+    header('HX-Location: home');
 }
 
 // Update the ratings for each user in the database
@@ -32,10 +32,10 @@ foreach ($ratings as $user_id => $user_ratings) {
         $stmt->execute();
 
         // Tell HTMX to redirect
-        header("HX-Location: home?alreadyRated=true");
+        header("HX-Location: home");
 
     } else {
         // Tell HTMX to redirect
-        header("HX-Location: home?alreadyRated=true");
+        header("HX-Location: home");
     }
 }

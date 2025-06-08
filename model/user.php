@@ -1,5 +1,6 @@
 <?php
-require_once 'config/database.php';
+
+include 'config/database.php';
 class User extends Database
 {
     private $conn;
@@ -45,6 +46,13 @@ class User extends Database
         $stmt->bindValue(':fullname', $fullname);
         $stmt->bindValue(':group_belong', $group_belong);
         $stmt->bindValue(':year_level_section', $year_level_section);
+        return $stmt->execute();
+    }
+    public function updateStatusToOffline($id)
+    {
+        $sql  = "UPDATE participant SET online_status = 0 WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
         return $stmt->execute();
     }
 }

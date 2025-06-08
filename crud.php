@@ -1,7 +1,7 @@
 <?php
 session_start();
-//require_once 'includes/database.php';
-require_once 'model/user.php';
+
+include 'model/user.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //for registration of participant

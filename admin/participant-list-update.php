@@ -7,13 +7,13 @@ $stmt = $conn->prepare($sql);
 $stmt->execute();
 $ratings = $stmt->fetchAll();
 
-$sql2  = "SELECT id, fullname, online_status FROM participant WHERE id NOT IN (SELECT DISTINCT rater_id FROM rate)";
+$sql2  = "SELECT id, fullname, online_status FROM participant";
 $stmt2 = $conn->prepare($sql2);
 $stmt2->execute();
 $notRated = $stmt2->fetchAll();
 
 if (count($notRated) > 0) {
-    echo "Who hasn't been rated yet:";
+    echo "STATUS:";
 
     foreach ($notRated as $participant) {
         if ($participant['online_status'] == 1) {
