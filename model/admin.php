@@ -33,4 +33,20 @@ class Admin extends Database
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getTotalScore($id)
+    {
+        $sql  = "SELECT AVG(content) as content, AVG(organization) as organization, AVG(presentation) as presentation, AVG(delivery) as delivery, AVG(content + organization + presentation + delivery) as total_score FROM rate WHERE participant_id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    public function getStudentFullname($id)
+    {
+        $sql  = "SELECT fullname FROM participant WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

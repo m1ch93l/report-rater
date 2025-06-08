@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a type="button" href="logout" class="text-decoration-none text-capitalize hover:text-dark p-1">
+                        <a type="button" href="logout" class="text-decoration-none text-capitalize text-white btn btn-sm btn-dark p-1">
                             <span><i class="bi bi-box-arrow-right"></i> logout</span>
                         </a>
                     </span>
@@ -105,19 +105,9 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
     <!-- Modal para sa bawat user -->
     <div class="modal fade" id="showEachCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <!-- mag add ng id kagaya ng "modalBody" para sa handle ng parameter -->
-                <div class="modal-body" id="modalBody">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+            <!-- mag add ng id kagaya ng "modalBody" para sa handle ng parameter -->
+            <div class="modal-body" id="modalBody">
+                ...
             </div>
         </div>
     </div>
