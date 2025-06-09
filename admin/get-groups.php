@@ -3,7 +3,8 @@ session_start();
 require_once '../includes/database.php';
 
 // get all groups
-$stmt = $conn->query('SELECT * FROM groups ORDER BY id ASC');
+$stmt = $conn->prepare('SELECT * FROM `groups` ORDER BY `id` ASC');
+$stmt->execute();
 $groups = $stmt->fetchAll();
 
 echo '<select class="form-select form-select-sm text-capitalize" name="active_group" hx-post="update-active-group.php"
