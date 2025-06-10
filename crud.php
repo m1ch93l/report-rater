@@ -2,6 +2,7 @@
 session_start();
 
 include 'model/user.php';
+$user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //for registration of participant
@@ -12,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $group_belong       = $_POST['group_belong'];
         $year_level_section = $_POST['year_level_section'];
 
-        $newUser = new User();
-        $stmt    = $newUser->create($participant, $password, $fullname, $group_belong, $year_level_section);
+        
+        $stmt    = $user->create($participant, $password, $fullname, $group_belong, $year_level_section);
 
         if ($stmt) {
             $_SESSION['registered'] = true;
@@ -35,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $participant = $_POST['participant'];
         $password    = $_POST['password'];
 
-        $student = new User();
-        $student = $student->findStudentUser($participant);
+        $student = $user->findStudentUser($participant);
         if ($student) {
             if ($student['password'] == $password) {
                 $_SESSION['participant']   = $student['id'];
@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['group_belong']  = $student['group_belong'];
                 $_SESSION['online_status'] = $student['online_status'];
 
-                $studentOnline = new User();
                 // change or update the online status of participants in the database table
                 $studentOnline->updateStatusToOnline($student['id']);
 

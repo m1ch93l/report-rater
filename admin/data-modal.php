@@ -7,8 +7,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 ?>
 <div class="modal-content" hx-get="data-modal.php?id=<?= $id ?>" hx-trigger="every 5s" hx-target="this">
     <div class="modal-header">
-        <?php $fullname = new Admin;
-                $fullname = $fullname->getStudentFullname($id); ?>
+        <?php $admin    = new Admin();
+        $fullname = $admin->getStudentFullname($id);
+        $scores   = $admin->getTotalScore($id);
+        ?>
         <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $fullname['fullname'] ?></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
@@ -23,10 +25,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $score  = new Admin;
-                    $scores = $score->getTotalScore($id);
-                    ?>
                     <tr>
                         <td>Content</td>
                         <td><?= round($scores['content'], 2) ?></td>
