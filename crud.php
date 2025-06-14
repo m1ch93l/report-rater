@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // using admin function class of user from model
-        $user  = new User();
         $admin = $user->findAdminUser($_POST['participant']);
         if ($admin) {
             if (password_verify($password, $admin['password'])) {
