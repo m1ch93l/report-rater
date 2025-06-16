@@ -13,13 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $group_belong       = $_POST['group_belong'];
         $year_level_section = $_POST['year_level_section'];
 
-        
-        $stmt    = $user->create($participant, $password, $fullname, $group_belong, $year_level_section);
+
+        $stmt = $user->create($participant, $password, $fullname, $group_belong, $year_level_section);
 
         if ($stmt) {
             $_SESSION['registered'] = true;
             header('location: index');
-            exit();
         } else {
             $_SESSION['error'] = true;
             header('location: index');
@@ -45,15 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['online_status'] = $student['online_status'];
 
                 // change or update the online status of participants in the database table
-                $studentOnline->updateStatusToOnline($student['id']);
+                $studentOnline = $user->updateStatusToOnline($student['id']);
 
                 header('location: home');
-                exit();
 
             } else {
                 $_SESSION['error'] = true;
                 header('location: index');
-                exit();
             }
         }
 
@@ -63,21 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (password_verify($password, $admin['password'])) {
                 $_SESSION['admin'] = $admin['id'];
                 header('location: admin/home');
-                exit();
             } else {
                 $_SESSION['error'] = true;
                 header('location: index');
-                exit();
             }
         } else {
             $_SESSION['error'] = true;
             header('location: index');
-            exit();
         }
 
     } else {
         $_SESSION['error'] = true;
         header('location: index');
-        exit();
     }
 }

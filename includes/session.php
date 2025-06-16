@@ -10,5 +10,4 @@ if (isset($_SESSION['participant'])) {
     $stmt->execute();
 } else {
     header('location: index.php');
-    exit();
 }

@@ -16,7 +16,7 @@ require_once 'model/rating.php';
         <div class="row">
             <div class="col-1"></div>
             <div class="col-lg-10 col-sm-12">
-            
+
                 <div class="card mb-1 shadow">
                     <div class="card-header">
                         <h4 class="card-title">Group #</h4>
@@ -52,11 +52,8 @@ require_once 'model/rating.php';
                         </ol>
                     </div>
 
-                    <div class="card-body" hx-swap-oob="innerHTML:#response">
+                    <div class="card-body">
                         <div class="table-responsive">
-                            <?php
-                                $participants = (new Rating())->getActiveParticipantsInAGroup();
-                            ?>
 
                             <form id="checked-contacts" hx-post="submit-rating" hx-swap="innerHTML">
                                 <table class="table">
@@ -70,7 +67,9 @@ require_once 'model/rating.php';
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($participants as $participant) { ?>
+                                        <?php $participants = (new Rating())->getActiveParticipantsInAGroup();
+
+                                        foreach ($participants as $participant) { ?>
                                             <tr class="fs-6 text-uppercase">
                                                 <td><?= $participant['fullname'] ?></td>
                                                 <td>
@@ -80,7 +79,7 @@ require_once 'model/rating.php';
                                                         <option value="<?= $participant['content'] ?>">
                                                             <?= $participant['content'] ?>
                                                         </option>
-                                                        <?php for ($i = 40; $i >= 1; $i--) { ?>
+                                                        <?php for ($i = 40; $i >= 30; $i--) { ?>
                                                             <option value="<?= $i ?>"><?= $i ?></option>
                                                         <?php } ?>
                                                     </select>
@@ -92,7 +91,7 @@ require_once 'model/rating.php';
                                                         <option value="<?= $participant['organization'] ?>">
                                                             <?= $participant['organization'] ?>
                                                         </option>
-                                                        <?php for ($i = 20; $i >= 1; $i--) { ?>
+                                                        <?php for ($i = 20; $i >= 15; $i--) { ?>
                                                             <option value="<?= $i ?>"><?= $i ?></option>
                                                         <?php } ?>
                                                     </select>
@@ -104,7 +103,7 @@ require_once 'model/rating.php';
                                                         <option value="<?= $participant['presentation'] ?>">
                                                             <?= $participant['presentation'] ?>
                                                         </option>
-                                                        <?php for ($i = 20; $i >= 1; $i--) { ?>
+                                                        <?php for ($i = 20; $i >= 15; $i--) { ?>
                                                             <option value="<?= $i ?>"><?= $i ?></option>
                                                         <?php } ?>
                                                     </select>
@@ -116,7 +115,7 @@ require_once 'model/rating.php';
                                                         <option value="<?= $participant['delivery'] ?>">
                                                             <?= $participant['delivery'] ?>
                                                         </option>
-                                                        <?php for ($i = 20; $i >= 1; $i--) { ?>
+                                                        <?php for ($i = 20; $i >= 15; $i--) { ?>
                                                             <option value="<?= $i ?>"><?= $i ?></option>
                                                         <?php } ?>
                                                     </select>

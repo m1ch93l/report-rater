@@ -46,7 +46,7 @@ if (!isset($_SESSION['admin']) || trim($_SESSION['admin']) == '') {
                         </li>
                     </ul>
                     <span class="navbar-text">
-                        <a type="button" href="logout" class="text-decoration-none text-capitalize text-white btn btn-sm btn-dark p-1">
+                        <a type="button" href="logout" class="text-decoration-none text-capitalize text-white btn btn-sm btn-dark p-1" hx-boost="true">
                             <span><i class="bi bi-box-arrow-right"></i> logout</span>
                         </a>
                     </span>
